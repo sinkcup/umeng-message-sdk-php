@@ -1,8 +1,17 @@
 {
     "name": "sinkcup/umeng-message-sdk-php",
     "description": "友盟消息推送SDK（PHP composer版）",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "sinkcup",
+            "homepage": "http://cnblogs.com/sink_cup/",
+            "role": "Developer"
+        }
+    ],
     "autoload": {
-        "psr-4": {
+        "psr-0": {
             "Umeng\\Message\\": "src/"
         }
     }
