@@ -5,7 +5,7 @@ $conf = array(
     'app_master_secret' => 'j96jq7s8vfdt9ldhsrivjxkzbwezi4uv', //按照友盟后台填写
 );
 
-$o = new Umeng\Message($conf);
+$o = new \Umeng\Message($conf);
 //广播
 $data = array(
     'title' => '广播标题',
