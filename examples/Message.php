@@ -5,13 +5,14 @@ $conf = array(
     'app_master_secret' => 'j96jq7s8vfdt9ldhsrivjxkzbwezi4uv', //按照友盟后台填写
 );
 
-$o = new \Umeng\Message($conf);
+$o = new \Umeng\Message\Client($conf);
 //广播
 $data = array(
     'title' => '广播标题',
     'text' => '友盟测试：broadcastNotification 这是一条广播',
 );
 $r = $o->broadcastNotification($data);
+var_dump($r);
 
 //按省发通知
 $data = array(
@@ -20,6 +21,7 @@ $data = array(
     'province' => '河北',
 );
 $r = $o->sendLbsNotification($data);
+var_dump($r);
  
 //其他功能的使用方法：请参考 tests/
 ?>
