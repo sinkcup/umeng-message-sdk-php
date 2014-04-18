@@ -1,11 +1,11 @@
 <?php
-namespace Umeng;
+namespace Umeng\Message;
 /**
  * 友盟消息推送
  * @author   sinkcup <sinkcup@163.com>
  */
 
-class Message
+class Client
 {
     protected $conf = array(
         'api_uri_prefix'    => 'http://msg.umeng.com/',
@@ -17,7 +17,7 @@ class Message
     {
         $this->conf = array_merge($this->conf, $conf);
         if(empty($this->conf['appkey']) || empty($this->conf['app_master_secret'])) {
-            throw new Message\Exception('need conf: appkey and app_master_secret');
+            throw new Exception('need conf: appkey and app_master_secret');
         }
     }
     
@@ -101,7 +101,7 @@ class Message
     public function sendNotificationToDevices($data)
     {
         if(!isset($data['device_tokens']) || empty($data['device_tokens'])) {
-            throw new Message\Exception('need param: device_tokens');
+            throw new Exception('need param: device_tokens');
         }
         $newData = array(
             'type' => 'listcast',
@@ -134,7 +134,7 @@ class Message
 
         //必填 消息发送类型,其值为unicast,listcast,broadcast,groupcast或customizedcast
         if(!isset($data['type'])) {
-            throw new Message\Exception('need param: type');
+            throw new Exception('need param: type');
         }
 
         // 可选 当type=customizedcast时,开发者填写自己的alias,友盟根据alias进行反查找,得到对应的device_token。多个alias时用英文逗号分,不能超过50个。
@@ -179,12 +179,12 @@ class Message
         $http->send();
         $body = $http->getResponseBody();
         if($http->getResponseCode() != 200) {
-            throw new Message\Exception($body);
+            throw new Exception($body);
         }
         $tmp = json_decode($body, true);
 
         if(!isset($tmp['ret']) || $tmp['ret'] != 'SUCCESS') {
-            throw new Message\Exception($body);
+            throw new Exception($body);
         }
         return true;
     }
